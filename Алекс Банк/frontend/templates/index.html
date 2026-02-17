@@ -1,0 +1,186 @@
+{% extends 'base.html' %} {% block title %} Главная {% endblock %} {% block body
+%}
+
+<header class="p-3 text-bg-dark">
+  <div class="container">
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+    >
+      <a
+        href="/"
+        class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+      >
+        <svg
+          class="bi me-2"
+          width="40"
+          height="32"
+          role="img"
+          aria-label="Bootstrap"
+        >
+          <use xlink:href="#bootstrap"></use>
+        </svg>
+      </a>
+      <ul
+        class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+      >
+        <li>
+          <a href="#" class="nav-link px-2 text-secondary"
+            ><ya-tr-span
+              data-index="26-0"
+              data-translated="true"
+              data-source-lang="en"
+              data-target-lang="ru"
+              data-value="Home"
+              data-translation="Главная"
+              data-ch="0"
+              data-type="trSpan"
+              data-selected="false"
+              style="visibility: inherit !important"
+              >Главная</ya-tr-span
+            ></a
+          >
+        </li>
+        <li>
+          <a href="#" class="nav-link px-2 text-white"
+            ><ya-tr-span
+              data-index="26-0"
+              data-translated="true"
+              data-source-lang="en"
+              data-target-lang="ru"
+              data-value="Features"
+              data-translation="Функции"
+              data-ch="0"
+              data-type="trSpan"
+              data-selected="false"
+              style="visibility: inherit !important"
+              >Функции</ya-tr-span
+            ></a
+          >
+        </li>
+        <li>
+          <a href="#" class="nav-link px-2 text-white"
+            ><ya-tr-span
+              data-index="26-0"
+              data-translated="true"
+              data-source-lang="en"
+              data-target-lang="ru"
+              data-value="Pricing"
+              data-translation="Цены"
+              data-ch="0"
+              data-type="trSpan"
+              data-selected="false"
+              style="visibility: inherit !important"
+              >Цены</ya-tr-span
+            ></a
+          >
+        </li>
+        <li>
+          <a href="#" class="nav-link px-2 text-white"
+            ><ya-tr-span
+              data-index="26-0"
+              data-translated="true"
+              data-source-lang="en"
+              data-target-lang="ru"
+              data-value="FAQs"
+              data-translation="Часто задаваемые вопросы"
+              data-ch="0"
+              data-type="trSpan"
+              data-selected="false"
+              style="visibility: inherit !important"
+              >Часто задаваемые вопросы</ya-tr-span
+            ></a
+          >
+        </li>
+        <li>
+          <a href="#" class="nav-link px-2 text-white"
+            ><ya-tr-span
+              data-index="26-0"
+              data-translated="true"
+              data-source-lang="en"
+              data-target-lang="ru"
+              data-value="About"
+              data-translation="О нас"
+              data-ch="0"
+              data-type="trSpan"
+              data-selected="false"
+              style="visibility: inherit !important"
+              >О нас</ya-tr-span
+            ></a
+          >
+        </li>
+      </ul>
+      <div class="text-end">
+        <a href="{{ url_for('auth') }}" class="btn btn-outline-light me-2">
+          Войти
+        </a>
+        <a href="{{ url_for('registration') }}" class="btn btn-warning">
+          Зарегистрироваться
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div
+  class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-body-tertiary"
+>
+  <div class="col-md-6 p-lg-5 mx-auto my-5">
+    <h1 class="display-3 fw-bold">
+      <ya-tr-span
+        data-index="3-0"
+        data-translated="false"
+        data-source-lang="en"
+        data-target-lang="ru"
+        data-value="Download our app from the App Store"
+        data-translation="Скачивайте Алекс-онлайн из App Store"
+        data-ch="0"
+        data-type="trSpan"
+        data-selected="false"
+        style="visibility: inherit !important"
+        >Скачивайте Алекс-онлайн из App Store</ya-tr-span
+      >
+    </h1>
+    <br>
+    <h3 class="fw-normal text-muted mb-3">
+      <ya-tr-span
+        data-index="3-0"
+        data-translated="false"
+        data-source-lang="en"
+        data-target-lang="ru"
+        data-value="Translate without commission"
+        data-translation="Переводите без комиссии"
+        data-ch="0"
+        data-type="trSpan"
+        data-selected="false"
+        style="visibility: inherit !important"
+        >Переводите без комиссии</ya-tr-span
+      >
+    </h3>
+    <br>
+    <div class="d-flex gap-3 justify-content-center lead fw-normal">
+      <a class="icon-link" href="#"
+        ><ya-tr-span
+          data-index="4-0"
+          data-translated="false"
+          data-source-lang="en"
+          data-target-lang="ru"
+          data-value=" Download "
+          data-translation=" Скачать "
+          data-ch="0"
+          data-type="trSpan"
+          style="visibility: inherit !important"
+          data-selected="false"
+        >
+          Скачать </ya-tr-span
+        ><svg class="bi" aria-hidden="true">
+          <use xlink:href="#chevron-right"></use>
+        </svg>
+    </div>
+  </div>
+  <div class="product-device shadow-sm d-none d-md-block"></div>
+  <div
+    class="product-device product-device-2 shadow-sm d-none d-md-block"
+  ></div>
+</div>
+
+{% endblock %}

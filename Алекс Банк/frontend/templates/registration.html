@@ -1,0 +1,153 @@
+{% extends 'base.html' %} {% block title %}Регистрация | Alex-Bank{% endblock %}
+{% block body %}
+<!-- Белая шапочка -->
+<header class="bg-white py-4 mb-5 border-bottom">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <div
+          class="bg-warning rounded-circle d-flex align-items-center justify-content-center"
+          style="width: 40px; height: 40px; margin-right: 15px"
+        >
+          <i class="bi bi-person-plus text-white"></i>
+        </div>
+        <div>
+          <h1 class="h4 mb-0 fw-bold text-dark">Alex-Bank</h1>
+          <small class="text-secondary">Регистрация</small>
+        </div>
+      </div>
+      <div>
+        <a href="{{ url_for('auth') }}" class="btn btn-outline-dark btn-sm">
+          <i class="bi bi-box-arrow-in-right me-1"></i>Войти
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Форма регистрации -->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <form class="mt-5">
+        <!-- Имя -->
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control py-2 border-secondary"
+            placeholder="Имя"
+            onmouseover="this.style.borderColor='#000'"
+            onmouseout="this.style.borderColor='#6c757d'"
+          />
+        </div>
+
+        <!-- Фамилия -->
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control py-2 border-secondary"
+            placeholder="Фамилия"
+            onmouseover="this.style.borderColor='#000'"
+            onmouseout="this.style.borderColor='#6c757d'"
+          />
+        </div>
+
+        <!-- Номер телефона -->
+        <div class="mb-3">
+          <input
+            type="tel"
+            class="form-control py-2 border-secondary"
+            placeholder="Номер телефона"
+            onmouseover="this.style.borderColor='#000'"
+            onmouseout="this.style.borderColor='#6c757d'"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <input
+            type="email"
+            class="form-control py-2 border-secondary"
+            placeholder="Email"
+            onmouseover="this.style.borderColor='#000'"
+            onmouseout="this.style.borderColor='#6c757d'"
+          />
+        </div>
+
+        <!-- Пароль -->
+        <div class="mb-4">
+          <input
+            type="password"
+            class="form-control py-2 border-secondary"
+            placeholder="Пароль"
+            onmouseover="this.style.borderColor='#000'"
+            onmouseout="this.style.borderColor='#6c757d'"
+          />
+        </div>
+
+        <!-- Кнопка регистрации -->
+        <button type="submit" class="btn btn-dark w-100 py-2 fw-bold mt-2">
+          <i class="bi bi-check-circle me-2"></i>Создать аккаунт
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    background-color: #f8f9fa;
+  }
+
+  .form-control {
+    border: 1px solid #6c757d !important;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+    background-color: white;
+  }
+
+  .form-control:hover {
+    border-color: #000 !important;
+  }
+
+  .form-control:focus {
+    border-color: #000 !important;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-dark {
+    background-color: #000;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  .btn-dark:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+  }
+
+  .col-md-4 {
+    max-width: 320px;
+  }
+
+  header {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .btn-outline-dark {
+    border: 1px solid #dee2e6;
+  }
+
+  .btn-outline-dark:hover {
+    background-color: #000;
+    color: white;
+  }
+
+  .mt-5 {
+    margin-top: 3rem !important;
+  }
+</style>
+{% endblock %}
