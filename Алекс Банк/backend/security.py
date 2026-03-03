@@ -143,7 +143,7 @@ class NumberPhoneVerification:
         return True, 'Длинна соответствует требованиям'
 
 
-    # проврека на наличие букв и лишних символов
+    # проверка на наличие букв и лишних символов
     def _checking_for_numbers(self, number_phone: str) -> Tuple[bool, str]:
         try:
             int(number_phone)
