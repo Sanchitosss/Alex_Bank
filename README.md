@@ -35,15 +35,25 @@ Frontend: HTML
 
 Алекс Банк/
 ├── backend/
+
 │   ├── app.py              # Основной файл приложения
+
 │   └── security.py          # Валидация данных
+
 ├── database/
+
 │   ├── database.py          # Класс для работы с БД
+
 │   └── queries.py           # SQL запросы
+
 ├── frontend/
+
 │   ├── templates/           # HTML шаблоны
+
 │   └── static/              # CSS, JS (в будущем)
+
 └── requirements.txt         # Зависимости
+
 
 
 🛠️ Установка и запуск
@@ -59,6 +69,8 @@ pip install -r requirements.txt
 
 # Запустить приложение
 python backend/app.py
+
+
 🎯 В планах
 🔄 PostgreSQL вместо SQLite
 
@@ -71,6 +83,7 @@ python backend/app.py
 📊 История операций
 
 🎨 Красивый фронтенд (CSS)
+
 
 📝 О проекте
 Проект создан в учебных целях для демонстрации навыков backend-разработки на Python. В коде сделан акцент на безопасность, валидацию данных и чистую архитектуру.
