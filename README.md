@@ -33,7 +33,9 @@ Frontend: HTML
 
 🧪 Самопроверка в каждом модуле
 
+
 Алекс Банк/
+
 ├── backend/
 
 │   ├── app.py              # Основной файл приложения
@@ -71,7 +73,9 @@ pip install -r requirements.txt
 python backend/app.py
 
 
-🎯 В планах
+
+
+# 🎯 В планах
 🔄 PostgreSQL вместо SQLite
 
 📦 SQLAlchemy ORM
