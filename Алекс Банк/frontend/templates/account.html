@@ -1,3 +1,17 @@
-{% block title %}Профиль{% endblock %} {% block body %}
-<h1>Ваш аккаунт</h1>
-{% endblock %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Профиль</title>
+  </head>
+  <body>
+    <p>{{ first_name }} {{ surname }}</p>
+    <p>Номер телефона: {{ number_phone }}</p>
+    <p>Баланс: {{ balance }}</p>
+
+    <form action="{{ url_for('logout') }}" method="post">
+      <button type="submit">Выйти</button>
+    </form>
+  </body>
+</html>
