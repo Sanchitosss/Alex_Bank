@@ -1,1 +1,19 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Алекс Банк</title>
+  </head>
+  <body>
+    <h1>Добро пожаловать в Алекс Банк!</h1>
+    <form action="{{ url_for('authentication') }}" method="get">
+      <button type="submit">Войти</button>
+    </form>
+    <form action="{{ url_for('registration') }}" method="get">
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+  </body>
+</html>
+
 
