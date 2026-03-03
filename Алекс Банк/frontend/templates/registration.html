@@ -1,1 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация в Алекс Банк</title>
+  </head>
+  <body>
+    <h1>Регистрация</h1>
+
+    <form action="{{ url_for('registration') }}" method="post">
+      <!-- Имя -->
+      <p>
+        <label>Имя:</label>
+        <input type="text" name="first_name" required />
+      </p>
+
+      <!-- Фамилия -->
+      <p>
+        <label>Фамилия:</label>
+        <input type="text" name="surname" required />
+      </p>
+
+      <!-- Год рождения -->
+      <p>
+        <label>Год рождения:</label>
+        <input type="number" name="year_of_birth" required />
+      </p>
+
+      <!-- Номер телефона -->
+      <p>
+        <label>Номер телефона:</label>
+        <input type="text" name="number_phone" required />
+      </p>
+
+      <!-- Пароль -->
+      <p>
+        <label>Пароль:</label>
+        <input type="password" name="password" required />
+      </p>
+
+      <!-- Повтор пароля -->
+      <p>
+        <label>Повторите пароль:</label>
+        <input type="password" name="replay_password" required />
+      </p>
+
+      <!-- Кнопка -->
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+
+    <p>
+      <a href="{{ url_for('authentication') }}">Уже есть аккаунт? Войти</a>
+    </p>
+  </body>
+</html>
 
