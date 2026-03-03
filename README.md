@@ -8,7 +8,7 @@
 
 Банковское приложение на Flask.
 
-**Стек:** Python, Flask, SQLite, HTML, CSS
+**Стек:** Python, Flask, SQLite, HTML
 
 **Реализовано:**
 - Регистрация и авторизация
