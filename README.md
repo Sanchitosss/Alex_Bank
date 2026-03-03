@@ -1,9 +1,10 @@
 Bank App
-https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white
-https://img.shields.io/badge/Flask-2.x-black?logo=flask&logoColor=white
-https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white
-https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white
-https://img.shields.io/badge/Validation-%E2%9C%85-green
+
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-2.x-black?logo=flask&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
+![Validation](https://img.shields.io/badge/Validation-✅-green)
 
 Банковское приложение на Flask с полноценной валидацией данных.
 
@@ -90,4 +91,5 @@ python backend/app.py
 
 
 📝 О проекте
+
 Проект создан в учебных целях для демонстрации навыков backend-разработки на Python. В коде сделан акцент на безопасность, валидацию данных и чистую архитектуру.
