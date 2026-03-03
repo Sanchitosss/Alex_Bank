@@ -20,7 +20,7 @@ def index():
 
 # Вход в аккаунт
 @app.route('/authentication', methods=['POST', 'GET'])
-def auth():
+def authentication():
     
     # если нажимается кнопка 'войти'
     if request.method == 'POST':
