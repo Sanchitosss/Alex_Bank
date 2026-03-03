@@ -35,7 +35,7 @@ Frontend: HTML
 🧪 Самопроверка в каждом модуле
 
 
-Алекс Банк/
+# Алекс Банк/
 
 ├── backend/
 
@@ -59,7 +59,7 @@ Frontend: HTML
 
 
 
-🛠️ Установка и запуск
+# 🛠️ Установка и запуск
 bash
 # Клонировать репозиторий
 git clone https://github.com/username/bank-app.git
