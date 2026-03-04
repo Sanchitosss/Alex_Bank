@@ -2,14 +2,13 @@ from flask import Flask, render_template, redirect, url_for, request, flash, ses
 from database.database import DataBase # работа с бд
 from security import AllValidations
 
-
 app = Flask(__name__, template_folder='../frontend/templates',
                         static_folder='../frontend/static')
 
 app.secret_key = 'sanechek_brat_001'
 
 # объект на основе клааса для работы с бд
-db = DataBase('training.db')
+db = DataBase("database\Alex_Bank.db")
 
 
 # Главная страница
@@ -137,7 +136,7 @@ def registration():
 def account():
     if 'id' not in session:
         flash('Сначала войдите в аккаунт')
-        return redirect(url_for('auth'))
+        return redirect(url_for('authentication'))
     
     return render_template('account.html',
                           first_name=session['first_name'],
@@ -149,10 +148,9 @@ def account():
 # Выход из аккаунта
 @app.route('/logout', methods=['POST'])
 def logout():
-    session.clear()  # Удаляем все данные сессии
+    session.clear() # Удаляем все данные сессии
     flash('Вы вышли из аккаунта')
     return redirect(url_for('index'))
-
 
 
 if __name__ == '__main__':
