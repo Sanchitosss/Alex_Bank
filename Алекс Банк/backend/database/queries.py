@@ -14,7 +14,7 @@ CREATE_TABLE = '''CREATE TABLE IF NOT EXISTS users (
 
 
 # Регистрация
-REGISTRATION = "INSERT INTO users (first_name, surname, age, number_phone, password) VALUES (?, ?, ?, ?, ?)"
+REGISTRATION = "INSERT INTO users (first_name, surname, year_of_birth, number_phone, password, balance) VALUES (?, ?, ?, ?, ?, 0)"
 
 
 # изменение номера телефона
