@@ -7,6 +7,21 @@ class DataBase:
     # передаём название файла бд
     def __init__(self, file_db):
         self.file_db = file_db
+        self._create_table()
+
+    # создание базы данных
+    def _create_table(self):
+        """Создаёт таблицу, если её нет"""
+        try:
+            with sqlite3.connect(self.file_db) as conn:
+                cursor = conn.cursor()
+                cursor.execute(CREATE_TABLE)
+                print("Таблица users создана или уже существует")
+                cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='users'")
+                
+        # ошибка подключения
+        except sqlite3.Error as e:
+            print(f"Ошибка при создании таблицы: {e}")
 
 
     # проверка на наличие пользователя
@@ -30,10 +45,13 @@ class DataBase:
         try:
             with sqlite3.connect(self.file_db) as conn:
                 cursor = conn.cursor()
+                print(f"Пытаюсь вставить: {first_name}, {surname}, {year_of_birth}, {number_phone}")
                 cursor.execute(REGISTRATION, (first_name, surname, year_of_birth, number_phone, password))
-
+                
+                print("Ищу пользователя по номеру:", number_phone)
                 cursor.execute(USER_PRESENCE, (number_phone, password))
                 data_user = cursor.fetchone()
+                print(f"Найден пользователь: {data_user}")
                 return True, "Регистрация выполнена!", data_user
 
         # ошибка подключения
