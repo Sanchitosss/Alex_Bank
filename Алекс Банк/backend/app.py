@@ -71,17 +71,17 @@ def registration():
         # пароль
         password = request.form.get('password', '').strip()
         # повтор пароля
-        replay_password = request.form.get('replay_password', '').strip()
+        repeat_password = request.form.get('repeat_password', '').strip()
 
 
         # если хотя бы одно поле не заполнено
-        fields = [first_name, surname, year_of_birth, number_phone, password, replay_password]
+        fields = [first_name, surname, year_of_birth, number_phone, password, repeat_password]
         if not all(fields):
             flash('Все поля должны быть заполнены!')
             return render_template('registration.html')
 
         # проверка совпадения паролей
-        if password != replay_password:
+        if password != repeat_password:
             flash('Пароли не совпадают!')
             return render_template('registration.html')
         
