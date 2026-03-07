@@ -1,6 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, session
 from database.database import DataBase # работа с бд
-from security import AllValidations
+from security import AllValidations # проверка данных пользователя для регистрации
+import bcrypt # хэширование паролей
+
 
 app = Flask(__name__, template_folder='../frontend/templates',
                         static_folder='../frontend/static')
@@ -32,24 +34,22 @@ def authentication():
             return render_template('authentication.html')
         
         # результат и сообщение из функции, которая проверяет в бд наличие пользователя
-        success, message, data_user = db.user_presence(number_phone, password)
+        success, message, data_user = db.user_presence(number_phone)
 
-        # если пользователь найден
-        if success:
-            # создаём сессию
-            session['id'] = data_user[0]
-            session['first_name'] = data_user[1]
-            session['surname'] = data_user[2]
-            session['year_of_birth'] = data_user[3]
-            session['number_phone'] = data_user[4]
-            session['balance'] = data_user[6]
-
-            return redirect(url_for('account'))
-
-        # если пользователь не найден
-        else:
-            flash(message)
+        # проверка на совпадение пароля
+        if not data_user or not bcrypt.checkpw(password.encode('utf-8'), data_user[5]):
+            flash('Неверный логин или пароль!')
             return render_template('authentication.html')
+
+        # создаём сессию
+        session['id'] = data_user[0]
+        session['first_name'] = data_user[1]
+        session['surname'] = data_user[2]
+        session['year_of_birth'] = data_user[3]
+        session['number_phone'] = data_user[4]
+        session['balance'] = data_user[6]
+
+        return redirect(url_for('account'))
     
     # при переходе на эту страницу
     return render_template('authentication.html')
@@ -80,7 +80,6 @@ def registration():
             flash('Все поля должны быть заполнены!')
             return render_template('registration.html')
 
-
         # проверка совпадения паролей
         if password != replay_password:
             flash('Пароли не совпадают!')
@@ -101,14 +100,22 @@ def registration():
                 # выводим ошибки
                 for error in error_list:
                     flash(f'{field_name}: {error}')
-            
             return render_template('registration.html')
 
+        # проверка, что нет пользователя с таким номером
+        success, message, data_user = db.user_presence(number_phone)
+        if data_user:
+            flash('Пользователь с таким номером уже существует!')
+            return render_template('registration.html')
 
-        # далее добавляем пользователя в бд, если проверки пройдены
+        # соль для хэширования
+        salt = bcrypt.gensalt(rounds=12)
         
-        # результаты и сообщение регистрации
-        success, message, data_user = db.registration(first_name=first_name, surname=surname, year_of_birth=year_of_birth, number_phone=number_phone, password=password)
+        # хэширование пароля
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+        
+        # результаты и сообщение регистрации пользователя
+        success, message, data_user = db.registration(first_name=first_name, surname=surname, year_of_birth=year_of_birth, number_phone=number_phone, password=hashed_password)
         
         # если успешно зарегистрировались
         if success:
