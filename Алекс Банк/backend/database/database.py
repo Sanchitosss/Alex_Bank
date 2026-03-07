@@ -25,11 +25,11 @@ class DataBase:
 
 
     # проверка на наличие пользователя
-    def user_presence(self, number_phone, password):
+    def user_presence(self, number_phone):
         try:
             with sqlite3.connect(self.file_db) as conn:
                 cursor = conn.cursor()
-                cursor.execute(USER_PRESENCE, (number_phone, password))
+                cursor.execute(USER_PRESENCE, (number_phone,))
                 data_user = cursor.fetchone()
                 if data_user:
                     return True, "Пользователь найден", data_user
