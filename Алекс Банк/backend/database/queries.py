@@ -24,4 +24,5 @@ UPDATE_NUMBER_PHONE = '''UPDATE users SET number_phone = ?
 
 # проверка на наличие пользователя
 USER_PRESENCE = '''SELECT * FROM users
-                    WHERE number_phone = ? AND password = ?'''
+                    WHERE number_phone = ?'''
+
