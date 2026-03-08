@@ -10,7 +10,7 @@ app = Flask(__name__, template_folder='../frontend/templates',
 app.secret_key = 'sanechek_brat_001'
 
 # объект на основе клааса для работы с бд
-db = DataBase("database\Alex_Bank.db")
+db = DataBase(r"C:\Users\5009044\OneDrive\Рабочий стол\Алекс Банк\backend\database\Alex_Bank.db")
 
 
 # Главная страница
@@ -120,12 +120,12 @@ def registration():
         # если успешно зарегистрировались
         if success:
             # создаём сессию
-            session['id'] = data_user[0]
-            session['first_name'] = data_user[1]
-            session['surname'] = data_user[2]
-            session['year_of_birth'] = data_user[3]
-            session['number_phone'] = data_user[4]
-            session['balance'] = data_user[6]
+            session['id'] = data_user[0] # id
+            session['first_name'] = data_user[1] # имя 
+            session['surname'] = data_user[2] # фамилия
+            session['year_of_birth'] = data_user[3] # год рождения
+            session['number_phone'] = data_user[4] # номер телефона
+            session['balance'] = data_user[6] # баланс
             
             return redirect(url_for('account'))
 
@@ -141,24 +141,43 @@ def registration():
 # Аккаунт
 @app.route('/account', methods=['GET'])
 def account():
+    # если нет сессии - переходим на главную
     if 'id' not in session:
-        flash('Сначала войдите в аккаунт')
-        return redirect(url_for('authentication'))
+        return redirect(url_for('index'))
     
+    # если есть сессия - переходим в аккаунт
     return render_template('account.html',
-                          first_name=session['first_name'],
-                          surname=session['surname'],
-                          number_phone=session['number_phone'],
-                          balance=session['balance'])
+                          first_name=session['first_name'], # имя
+                          surname=session['surname'], # фамилия
+                          number_phone=session['number_phone'], # номер телефона
+                          balance=session['balance']) # баланс
+
+
+# Удаление аккаунта
+@app.route('/delete', methods=['POST'])
+def delete():
+    # если нет сессии
+    if 'id' not in session:
+        return redirect(url_for('index'))
+
+    # удаляем аккаунт
+    success, message = db.delete_user(session['number_phone'])
+
+    # если аккаунт удалился
+    if success:
+        session.clear()  # очищаем сессию здесь!
+        return redirect(url_for('index'))
+
+    # если аккаунт не удалился
+    return redirect(url_for('account'))
 
 
 # Выход из аккаунта
 @app.route('/logout', methods=['POST'])
 def logout():
     session.clear() # Удаляем все данные сессии
-    flash('Вы вышли из аккаунта')
     return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, use_reloader=False, port=5001)
