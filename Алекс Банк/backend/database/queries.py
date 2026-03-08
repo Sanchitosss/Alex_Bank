@@ -25,4 +25,7 @@ UPDATE_NUMBER_PHONE = '''UPDATE users SET number_phone = ?
 # проверка на наличие пользователя
 USER_PRESENCE = '''SELECT * FROM users
                     WHERE number_phone = ?'''
+                    
 
+# удаление пользователя
+DELETE_USER = '''DELETE FROM users WHERE number_phone = ?'''
