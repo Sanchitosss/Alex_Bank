@@ -29,7 +29,7 @@ class DataBase:
         try:
             with sqlite3.connect(self.file_db) as conn:
                 cursor = conn.cursor()
-                cursor.execute(USER_PRESENCE, (number_phone,))
+                cursor.execute(USER_PRESENCE, (number_phone, ))
                 data_user = cursor.fetchone()
                 if data_user:
                     return True, "Пользователь найден", data_user
@@ -49,7 +49,9 @@ class DataBase:
                 cursor.execute(REGISTRATION, (first_name, surname, year_of_birth, number_phone, password))
                 
                 print("Ищу пользователя по номеру:", number_phone)
-                cursor.execute(USER_PRESENCE, (number_phone, password))
+                
+                # проверка на наличие пользователя
+                cursor.execute(USER_PRESENCE, (number_phone, ))
                 data_user = cursor.fetchone()
                 print(f"Найден пользователь: {data_user}")
                 return True, "Регистрация выполнена!", data_user
@@ -78,3 +80,16 @@ class DataBase:
         # используется уже существующий номер телефона
         except sqlite3.IntegrityError as e:
             return False, "Номер телефона уже занят!"
+
+    
+    # удаление пользователя
+    def delete_user(self, number_phone):
+        try:
+            with sqlite3.connect(self.file_db) as conn:
+                cursor = conn.cursor()
+                cursor.execute(DELETE_USER, (number_phone, ))
+                return True, "Пользователь удалён!"
+
+        # ошибка подключения
+        except sqlite3.OperationalError as e:
+            return False, "Ошибка подключения к базе данных!"
