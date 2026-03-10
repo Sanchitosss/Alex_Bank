@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash, ses
 from database.database import DataBase # работа с бд
 from security import AllValidations # проверка данных пользователя для регистрации
 import bcrypt # хэширование паролей
+from profile_user import User
 
 
 app = Flask(__name__, template_folder='../frontend/templates',
@@ -42,12 +43,8 @@ def authentication():
             return render_template('authentication.html')
 
         # создаём сессию
-        session['id'] = data_user[0]
-        session['first_name'] = data_user[1]
-        session['surname'] = data_user[2]
-        session['year_of_birth'] = data_user[3]
-        session['number_phone'] = data_user[4]
-        session['balance'] = data_user[6]
+        acc = User(data_user)
+        acc.create_session()
 
         return redirect(url_for('account'))
     
@@ -59,6 +56,7 @@ def authentication():
 # Регистрация аккаунта
 @app.route('/registration', methods=['POST', 'GET'])
 def registration():
+
     if request.method == 'POST':
         # имя
         first_name = request.form.get('first_name', '').strip()
@@ -72,7 +70,6 @@ def registration():
         password = request.form.get('password', '').strip()
         # повтор пароля
         repeat_password = request.form.get('repeat_password', '').strip()
-
 
         # если хотя бы одно поле не заполнено
         fields = [first_name, surname, year_of_birth, number_phone, password, repeat_password]
@@ -100,6 +97,7 @@ def registration():
                 # выводим ошибки
                 for error in error_list:
                     flash(f'{field_name}: {error}')
+
             return render_template('registration.html')
 
         # проверка, что нет пользователя с таким номером
@@ -120,12 +118,8 @@ def registration():
         # если успешно зарегистрировались
         if success:
             # создаём сессию
-            session['id'] = data_user[0] # id
-            session['first_name'] = data_user[1] # имя 
-            session['surname'] = data_user[2] # фамилия
-            session['year_of_birth'] = data_user[3] # год рождения
-            session['number_phone'] = data_user[4] # номер телефона
-            session['balance'] = data_user[6] # баланс
+            acc = User(data_user)
+            acc.create_session()
             
             return redirect(url_for('account'))
 
@@ -153,6 +147,37 @@ def account():
                           balance=session['balance']) # баланс
 
 
+# изменение номера телефона
+@app.route('/update_number', methods=['POST', 'GET'])
+def update_number():
+    if 'id' not in session:
+        return redirect(url_for('authentication'))
+
+    elif request.method == 'POST':
+        # проверяем новый номер телефона на валидность
+        new_number_phone = request.form.get('new_number_phone', '').strip()
+
+        if not new_number_phone:
+            flash('Поле "номер телефона" должно быть заполнено!')
+            return render_template('update_number.html')
+            
+        # изменяем номер телефона
+        acc = User()
+        success, message = acc.update_number_phone(db, new_number_phone)
+        
+        # если номер изменился
+        if success:
+            flash(message)
+            return redirect(url_for('account'))
+
+        # если ошибка
+        flash(message)
+        return render_template('update_number.html')
+
+    return render_template('update_number.html')
+
+
+
 # Удаление аккаунта
 @app.route('/delete', methods=['POST'])
 def delete():
@@ -161,23 +186,24 @@ def delete():
         return redirect(url_for('index'))
 
     # удаляем аккаунт
-    success, message = db.delete_user(session['number_phone'])
+    acc = User()
+    success, message = acc.delete_account(db)
 
     # если аккаунт удалился
     if success:
-        session.clear()  # очищаем сессию здесь!
         return redirect(url_for('index'))
 
     # если аккаунт не удалился
+    flash(message)
     return redirect(url_for('account'))
 
 
 # Выход из аккаунта
 @app.route('/logout', methods=['POST'])
 def logout():
-    session.clear() # Удаляем все данные сессии
+    session.clear() # удаляем все данные сессии
     return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False, port=5001)
+    app.run(debug=True, port=5005, use_reloader=False)
