@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Смена номера телефона</title>
+  </head>
+  <body>
+    <form action="{{ url_for('update_number') }}" method="post">
+      <!-- Новый номер телефона -->
+      <p>
+        <label>Введите новый номер телефона:</label>
+        <input type="text" name="new_number_phone" required />
+      </p>
+      <!-- Кнопка -->
+      <button type="submit">Изменить номер</button>
+    </form>
+    <br />
+    <p>
+      <a href="{{ url_for('account') }}">Отмена</a>
+    </p>
+</html>
