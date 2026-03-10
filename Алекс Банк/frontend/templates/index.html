@@ -3,16 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Алекс Банк</title>
+    <title>Профиль</title>
   </head>
   <body>
-    <h1>Добро пожаловать в Алекс Банк!</h1>
-    <form action="{{ url_for('authentication') }}" method="get">
-      <button type="submit">Войти</button>
+    <p>{{ first_name }} {{ surname }}</p>
+    <p>Номер телефона: {{ number_phone }}</p>
+    <p>Баланс: {{ balance }}</p>
+    <br />
+    <!-- выход из аккаунта -->
+    <form action="{{ url_for('logout') }}" method="post" name="exit">
+      <button type="submit">Выйти</button>
     </form>
     <br />
-    <form action="{{ url_for('registration') }}" method="get">
-      <button type="submit">Зарегистрироваться</button>
+    <!-- удаление аккаунта -->
+    <form action="{{ url_for('delete') }}" method="post" name="delete">
+      <button type="submit">Удалить аккаунт</button>
+    </form>
+    <br />
+    <!-- изменение номера телефона -->
+    <form
+      action="{{ url_for('update_number') }}"
+      method="post"
+      name="update_number"
+    >
+      <button type="submit">Изменить номер телефона</button>
     </form>
   </body>
 </html>
