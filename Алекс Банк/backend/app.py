@@ -66,6 +66,9 @@ def registration():
         year_of_birth = request.form.get('year_of_birth', '').strip()
         # номер телефона
         number_phone = request.form.get('number_phone', '').strip()
+        # изменяем номер, чтобы начинался на +7
+        if number_phone[0] == "8":
+          number_phone = "+7" + number_phone[1:]
         # пароль
         password = request.form.get('password', '').strip()
         # повтор пароля
